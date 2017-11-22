@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmKindleSpider));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnConfig = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,7 +44,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button3);
+            this.panel1.Controls.Add(this.btnConfig);
             this.panel1.Controls.Add(this.btnStop);
             this.panel1.Controls.Add(this.btnStart);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -53,17 +53,20 @@
             this.panel1.Size = new System.Drawing.Size(389, 58);
             this.panel1.TabIndex = 1;
             // 
-            // button3
+            // btnConfig
             // 
-            this.button3.Location = new System.Drawing.Point(302, 19);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "配置数据库";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnConfig.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnConfig.Location = new System.Drawing.Point(302, 19);
+            this.btnConfig.Name = "btnConfig";
+            this.btnConfig.Size = new System.Drawing.Size(75, 23);
+            this.btnConfig.TabIndex = 2;
+            this.btnConfig.Text = "配置数据库";
+            this.btnConfig.UseVisualStyleBackColor = true;
+            this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
             // 
             // btnStop
             // 
+            this.btnStop.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnStop.Location = new System.Drawing.Point(160, 19);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(75, 23);
@@ -74,6 +77,7 @@
             // 
             // btnStart
             // 
+            this.btnStart.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnStart.Location = new System.Drawing.Point(12, 19);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
@@ -104,6 +108,7 @@
             // txtLog
             // 
             this.txtLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtLog.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtLog.Location = new System.Drawing.Point(0, 44);
             this.txtLog.Name = "txtLog";
             this.txtLog.ReadOnly = true;
@@ -139,7 +144,7 @@
 
         #endregion
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnConfig;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Label label1;

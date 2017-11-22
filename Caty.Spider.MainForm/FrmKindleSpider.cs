@@ -279,7 +279,7 @@ namespace Caty.Spider.MainForm
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            
+            spiderTask.Dispose();
         }
 
         private void FrmKindleSpider_SizeChanged(object sender, EventArgs e)
@@ -305,11 +305,11 @@ namespace Caty.Spider.MainForm
             int intMinute = e.SignalTime.Minute;
             int intSecond = e.SignalTime.Second;
             //定制时间 如 在10：30：00的时候执行某个函数
-            int iHour = 16;
+            int iHour = 00;
             int iMinute = 30;
             int iSecond = 00;
             // 设置　 每秒钟的开始执行一次  
-            if (intMinute == iMinute)
+            if (intHour == iHour && intMinute == iMinute)
             {
                 //SetMessage("每秒钟的开始执行一次！");
                 spiderTask.Start();
@@ -319,6 +319,12 @@ namespace Caty.Spider.MainForm
             //{
             //    SetMessage("定时测试~~~");
             //}
+        }
+
+        private void btnConfig_Click(object sender, EventArgs e)
+        {
+            FrmConfig frmConfig = new FrmConfig();
+            frmConfig.ShowDialog();
         }
     }
 }
