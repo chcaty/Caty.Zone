@@ -48,17 +48,19 @@
             this.panel1.Controls.Add(this.btnStop);
             this.panel1.Controls.Add(this.btnStart);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 324);
+            this.panel1.Location = new System.Drawing.Point(0, 459);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(389, 58);
+            this.panel1.Size = new System.Drawing.Size(454, 82);
             this.panel1.TabIndex = 1;
             // 
             // btnConfig
             // 
             this.btnConfig.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnConfig.Location = new System.Drawing.Point(302, 19);
+            this.btnConfig.Location = new System.Drawing.Point(352, 27);
+            this.btnConfig.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnConfig.Name = "btnConfig";
-            this.btnConfig.Size = new System.Drawing.Size(75, 23);
+            this.btnConfig.Size = new System.Drawing.Size(87, 33);
             this.btnConfig.TabIndex = 2;
             this.btnConfig.Text = "配置数据库";
             this.btnConfig.UseVisualStyleBackColor = true;
@@ -67,9 +69,10 @@
             // btnStop
             // 
             this.btnStop.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnStop.Location = new System.Drawing.Point(160, 19);
+            this.btnStop.Location = new System.Drawing.Point(187, 27);
+            this.btnStop.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(75, 23);
+            this.btnStop.Size = new System.Drawing.Size(87, 33);
             this.btnStop.TabIndex = 1;
             this.btnStop.Text = "停止爬虫";
             this.btnStop.UseVisualStyleBackColor = true;
@@ -78,9 +81,10 @@
             // btnStart
             // 
             this.btnStart.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnStart.Location = new System.Drawing.Point(12, 19);
+            this.btnStart.Location = new System.Drawing.Point(14, 27);
+            this.btnStart.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(75, 23);
+            this.btnStart.Size = new System.Drawing.Size(87, 33);
             this.btnStart.TabIndex = 0;
             this.btnStart.Text = "启动爬虫";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -89,10 +93,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(122, 9);
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(142, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(145, 25);
+            this.label1.Size = new System.Drawing.Size(151, 27);
             this.label1.TabIndex = 2;
             this.label1.Text = "Kindle资源爬虫";
             // 
@@ -101,18 +105,20 @@
             this.panel2.Controls.Add(this.label1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(389, 44);
+            this.panel2.Size = new System.Drawing.Size(454, 62);
             this.panel2.TabIndex = 3;
             // 
             // txtLog
             // 
             this.txtLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtLog.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtLog.Location = new System.Drawing.Point(0, 44);
+            this.txtLog.Location = new System.Drawing.Point(0, 62);
+            this.txtLog.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtLog.Name = "txtLog";
             this.txtLog.ReadOnly = true;
-            this.txtLog.Size = new System.Drawing.Size(389, 280);
+            this.txtLog.Size = new System.Drawing.Size(454, 397);
             this.txtLog.TabIndex = 4;
             this.txtLog.Text = "";
             // 
@@ -125,13 +131,16 @@
             // 
             // FrmKindleSpider
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(389, 382);
+            this.ClientSize = new System.Drawing.Size(454, 541);
             this.Controls.Add(this.txtLog);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FrmKindleSpider";
             this.Text = "Kindle资源爬虫";
             this.SizeChanged += new System.EventHandler(this.FrmKindleSpider_SizeChanged);

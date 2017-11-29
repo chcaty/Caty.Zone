@@ -49,11 +49,35 @@
   <ItemGroup>
     <Compile Include="Book.cs" />
     <Compile Include="BookContext.cs" />
+    <Compile Include="Migrations\201711251215048_InitialCreate.cs" />
+    <Compile Include="Migrations\201711251215048_InitialCreate.Designer.cs">
+      <DependentUpon>201711251215048_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711261023587_AddSpiderArgsTable.cs" />
+    <Compile Include="Migrations\201711261023587_AddSpiderArgsTable.Designer.cs">
+      <DependentUpon>201711261023587_AddSpiderArgsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpiderArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Caty.Spider.Utilities\Caty.Spider.Utilities.csproj">
+      <Project>{CB4CAF07-723B-4C37-A2CB-6A9A8E2ACA20}</Project>
+      <Name>Caty.Spider.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201711251215048_InitialCreate.resx">
+      <DependentUpon>201711251215048_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711261023587_AddSpiderArgsTable.resx">
+      <DependentUpon>201711261023587_AddSpiderArgsTable.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

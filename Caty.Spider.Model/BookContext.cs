@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Caty.Spider.Utilities.Code;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
@@ -9,8 +10,11 @@ namespace Caty.Spider.Model
 {
     public class BookContext:DbContext
     {
-        public BookContext(string connectionName = "KindleDb") : base(connectionName) { }
+        public BookContext() : base(ConnectionStrings.GetConnectionValue("KindleDb")) { }
+        //public BookContext() :base("Data Source=.;Database=KindleDb;UID=sa;PWD=123;") { }
 
         public DbSet<Book> Books { get; set; }
+
+        public DbSet<SpiderArgs> SpiderArgs { get; set; }
     }
 }

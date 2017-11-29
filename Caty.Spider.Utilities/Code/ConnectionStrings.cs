@@ -18,7 +18,8 @@ namespace Caty.Spider.Utilities.Code
         {
             if(ConfigurationManager.ConnectionStrings[key] != null)
             {
-                return ConfigurationManager.ConnectionStrings[key].ConnectionString;
+                return EncodeAndDecode.DecodeBase64(ConfigurationManager.ConnectionStrings[key].ConnectionString);
+                //return ConfigurationManager.ConnectionStrings[key].ConnectionString;
             }
             return string.Empty;
         }
@@ -31,6 +32,7 @@ namespace Caty.Spider.Utilities.Code
                 isModified = true;
             }
             //新建一个连接字符串实例
+            conString = EncodeAndDecode.EncodeBase64(conString);
             ConnectionStringSettings mySettings = new ConnectionStringSettings(key, conString);
             // 打开可执行的配置文件
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -45,6 +47,32 @@ namespace Caty.Spider.Utilities.Code
             config.Save(ConfigurationSaveMode.Modified);
             //强制重新载入配置文件的ConnectionString配置节
             ConfigurationManager.RefreshSection("connectionStrings");
+        }
+
+        public static string GetArgsValue(string key)
+        {
+            if(ConfigurationManager.AppSettings[key] != null)
+            {
+                return ConfigurationManager.AppSettings[key];
+            }
+            return string.Empty;
+        }
+
+        public static void UpdateArgsValue(string key ,string value)
+        {
+            bool isModified = false;
+            if(ConfigurationManager.AppSettings[key] != null)
+            {
+                isModified = true;
+            }
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            if (isModified)
+            {
+                config.AppSettings.Settings.Remove(key);
+            }
+            config.AppSettings.Settings.Add(key, value);
+            config.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection(key);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AngleSharp.Dom;
 using AngleSharp.Parser.Html;
 using Caty.Spider.Crawler;
+using Caty.Spider.Dal.Implements;
 using Caty.Spider.Model;
 using Caty.Spider.Utilities.Log;
 using System;
@@ -19,6 +20,8 @@ namespace Caty.Spider.MainForm
 {
     public partial class FrmKindleSpider : Form
     {
+        BookDal bookDal = new BookDal();
+        SpiderArgsDal argsDal = new SpiderArgsDal();
         static HtmlParser htmlParser = new HtmlParser();
         static List<Book> bookList = new List<Book>();
         static List<string> pageList = new List<string>();
@@ -38,7 +41,7 @@ namespace Caty.Spider.MainForm
             timer1.Enabled = true;
             timer1.Interval = 60000;
             timer1.AutoReset = true;
-            spiderTask.Start();
+            //spiderTask.Start();
             //new Thread((ThreadStart)(delegate ()
             //{
             //    KindleCrawler();
@@ -80,6 +83,7 @@ namespace Caty.Spider.MainForm
                             BookDownloadCrawler(b);
                         }
                     }
+                    bookDal.SaveChange();
                     bookList.Clear();
                 }
                 Console.WriteLine("爬虫抓取任务完成！合计 " + link.Length + " 个页面。");
@@ -244,15 +248,24 @@ namespace Caty.Spider.MainForm
                             //bookList.Find(b => b.BookLink.Equals(Url)).DownloadLink = onlineURL;
                         });
                     book.DownloadLink_BDYP = linklist[0];
-                    book.DownloadLink_CDWP = linklist[1];
-                    book.DownloadLink_TYYP = linklist[2];
+                    book.DownloadLink_CTWP = linklist.Count > 1 ? linklist[1] : String.Empty;
+                    book.DownloadLink_TYYP = linklist.Count > 2 ? linklist[2] : String.Empty; 
                 }
                 var downloadpwdinfo = downloaddom.QuerySelectorAll("div.desc p").ToList();
                 var info = downloadpwdinfo[downloadpwdinfo.Count - 3].InnerHtml;
                 string[] str = info.Split('：');
-                book.DownloadPsw_BDYP = str[2].Substring(0, 4);
-                book.DownloadPsw_TYYP = str[3].Substring(0, 4);
-
+                book.DownloadPsw_BDYP = str.Length > 2 ? str[2].Substring(0, 4) : String.Empty; 
+                book.DownloadPsw_TYYP = str.Length > 3 ? str[3].Substring(0, 4) : String.Empty; 
+                if (!bookDal.IsExist(book))
+                {
+                    bookDal.AddEntity(book);
+                }
+                else
+                {
+                    Book oldbook = bookDal.LoadEntities(b => b.BookName == book.BookName).First();
+                    book.BookId = oldbook.BookId;
+                    bookDal.EditEntity(book);
+                }
                 Console.WriteLine(book.BookName + "下载链接抓取任务完成！");
                 SetMessage(book.BookName + "下载链接抓取任务完成！");
                 Console.WriteLine("耗时：" + e.Milliseconds + "毫秒");
@@ -300,19 +313,27 @@ namespace Caty.Spider.MainForm
 
         private void Timer1_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
+            
             //得到 hour minute second 如果等于某个值就开始执行程序
             int intHour = e.SignalTime.Hour;
             int intMinute = e.SignalTime.Minute;
             int intSecond = e.SignalTime.Second;
             //定制时间 如 在10：30：00的时候执行某个函数
-            int iHour = 00;
-            int iMinute = 30;
+            int iHour = Convert.ToInt32(argsDal.LoadEntities(b => true).First().Hour);
+            int iMinute = Convert.ToInt32(argsDal.LoadEntities(b => true).First().Minute);
             int iSecond = 00;
             // 设置　 每秒钟的开始执行一次  
             if (intHour == iHour && intMinute == iMinute)
             {
                 //SetMessage("每秒钟的开始执行一次！");
                 spiderTask.Start();
+            }
+            else
+            {
+                this.BeginInvoke(new MethodInvoker(() =>
+                {
+                    txtLog.Text += String.Format("当前时间：{0},爬虫将在{1}启动", DateTime.Now.ToString() + "\r\n", iHour + ":" + iMinute);
+                }));
             }
             //设置时间 开始执行程序
             //if (intHour == iHour && intMinute == iMinute && intSecond == iSecond)

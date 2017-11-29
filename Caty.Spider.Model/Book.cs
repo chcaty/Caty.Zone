@@ -20,9 +20,9 @@ namespace Caty.Spider.Model
 
         public string DownloadPsw_BDYP { get; set; }
 
-        public string DownloadLink_CDWP { get; set; }
+        public string DownloadLink_CTWP { get; set; }
 
-        public string DownloadPsw_CDWP { get; set; }
+        public string DownloadPsw_CTWP { get; set; }
 
         public string DownloadLink_TYYP { get; set; }
 

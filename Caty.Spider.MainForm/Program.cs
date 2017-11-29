@@ -2,6 +2,7 @@
 using log4net;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,6 +18,14 @@ namespace Caty.Spider.MainForm
         [STAThread]
         static void Main()
         {
+            //using (var ctx = new BookContext())
+            //{
+
+            //    var o = new Book();
+            //    o.BookName = "测试";
+            //    ctx.Books.Add(o);
+            //    ctx.SaveChanges();
+            //}
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FrmKindleSpider());

@@ -89,6 +89,7 @@
     </Compile>
     <None Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -110,6 +111,10 @@
     <ProjectReference Include="..\Caty.Spider.Crawler\Caty.Spider.Crawler.csproj">
       <Project>{9ce033ef-9416-45ef-9bfb-e302e9348734}</Project>
       <Name>Caty.Spider.Crawler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Caty.Spider.Dal\Caty.Spider.Dal.csproj">
+      <Project>{8DEE6484-F96D-420D-9BA5-2E8C6F106F3C}</Project>
+      <Name>Caty.Spider.Dal</Name>
     </ProjectReference>
     <ProjectReference Include="..\Caty.Spider.Model\Caty.Spider.Model.csproj">
       <Project>{71F04C94-09C6-4E38-B2FB-5EA0201E717C}</Project>
