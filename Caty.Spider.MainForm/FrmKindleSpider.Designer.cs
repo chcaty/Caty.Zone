@@ -48,16 +48,16 @@
             this.panel1.Controls.Add(this.btnStop);
             this.panel1.Controls.Add(this.btnStart);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 459);
+            this.panel1.Location = new System.Drawing.Point(0, 394);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(454, 82);
+            this.panel1.Size = new System.Drawing.Size(361, 82);
             this.panel1.TabIndex = 1;
             // 
             // btnConfig
             // 
             this.btnConfig.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnConfig.Location = new System.Drawing.Point(352, 27);
+            this.btnConfig.Location = new System.Drawing.Point(248, 27);
             this.btnConfig.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnConfig.Name = "btnConfig";
             this.btnConfig.Size = new System.Drawing.Size(87, 33);
@@ -69,7 +69,7 @@
             // btnStop
             // 
             this.btnStop.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnStop.Location = new System.Drawing.Point(187, 27);
+            this.btnStop.Location = new System.Drawing.Point(135, 27);
             this.btnStop.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(87, 33);
@@ -94,7 +94,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(142, 13);
+            this.label1.Location = new System.Drawing.Point(112, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(151, 27);
             this.label1.TabIndex = 2;
@@ -107,7 +107,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(454, 62);
+            this.panel2.Size = new System.Drawing.Size(361, 62);
             this.panel2.TabIndex = 3;
             // 
             // txtLog
@@ -118,7 +118,7 @@
             this.txtLog.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtLog.Name = "txtLog";
             this.txtLog.ReadOnly = true;
-            this.txtLog.Size = new System.Drawing.Size(454, 397);
+            this.txtLog.Size = new System.Drawing.Size(361, 332);
             this.txtLog.TabIndex = 4;
             this.txtLog.Text = "";
             // 
@@ -133,7 +133,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(454, 541);
+            this.ClientSize = new System.Drawing.Size(361, 476);
             this.Controls.Add(this.txtLog);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);

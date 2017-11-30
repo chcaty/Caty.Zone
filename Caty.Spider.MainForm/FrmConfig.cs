@@ -37,16 +37,31 @@ namespace Caty.Spider.MainForm
 
         private void GetSetArgs()
         {
-            SpiderArgs args = ArgsDal.LoadEntities(b => true).First();
-
+            SpiderArgs args;
+            bool IsSpl;
+            if (Convert.ToBoolean(ConnectionStrings.GetArgsValue("IsSql")))
+            {
+                args = ArgsDal.LoadEntities(b => true).First();
+                IsSpl = true;
+            }
+            else
+            {
+                IsSpl = false;
+                args = new SpiderArgs
+                {
+                    Hour = ConnectionStrings.GetArgsValue("Hour"),
+                    Minute = ConnectionStrings.GetArgsValue("Minute"),
+                    SpiderType = Convert.ToInt32(ConnectionStrings.GetArgsValue("SpiderType"))
+                };
+            }                
             this.BeginInvoke(new MethodInvoker(() =>
             {
+                checkIsSql.Checked = IsSpl;
                 if (args.SpiderType == 1)
                 {
                     rbtnDay.Checked = true;
                     numHour.Value = Convert.ToDecimal(args.Hour.Trim());
                     numMinute.Value = Convert.ToDecimal(args.Minute.Trim());
-
                 }
                 else
                 {
@@ -101,6 +116,7 @@ namespace Caty.Spider.MainForm
             numHour.Enabled = flag;
             numMinute.Enabled = flag;
             numMinute2.Enabled = flag;
+            checkIsSql.Enabled = flag;
         }
 
         private void btnSqlSave_Click(object sender, EventArgs e)
@@ -112,7 +128,8 @@ namespace Caty.Spider.MainForm
         private void btnSetSave_Click(object sender,EventArgs e)
         {
             //ArgsDal.LoadEntities(null).First();
-            SpiderArgs args = ArgsDal.LoadEntities(b=>true).First();
+            //SpiderArgs args = ArgsDal.LoadEntities(b=>true).First();
+            SpiderArgs args = new SpiderArgs();
             if (rbtnDay.Checked)
             {
                 args.SpiderType = 1;
@@ -125,13 +142,18 @@ namespace Caty.Spider.MainForm
                 args.Hour = String.Empty;
                 args.Minute = numMinute2.Value.ToString();
             }
-            ArgsDal.AddEntity(args);
-            ArgsDal.SaveChange();
-            bool IsSpl = checkIsSql.Checked;
-            ConnectionStrings.UpdateArgsValue("IsSql", IsSpl.ToString());
-            ConnectionStrings.UpdateArgsValue("SpiderType", args.SpiderType.ToString());
-            ConnectionStrings.UpdateArgsValue("Hour", args.Hour.ToString());
-            ConnectionStrings.UpdateArgsValue("Minute", args.Minute.ToString());
+            if (checkIsSql.Checked)
+            {
+                ArgsDal.EditEntity(args);
+                ArgsDal.SaveChange();
+            }
+            else
+            {
+                ConnectionStrings.UpdateArgsValue("IsSql", checkIsSql.Checked.ToString());
+                ConnectionStrings.UpdateArgsValue("SpiderType", args.SpiderType.ToString());
+                ConnectionStrings.UpdateArgsValue("Hour", args.Hour.ToString());
+                ConnectionStrings.UpdateArgsValue("Minute", args.Minute.ToString());
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -147,11 +169,6 @@ namespace Caty.Spider.MainForm
         private void checkSetModified_CheckedChanged(object sender, EventArgs e)
         {
             SetSetControlEnable(checkSetModified.Checked);
-        }
-
-        private void checkIsSql_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
