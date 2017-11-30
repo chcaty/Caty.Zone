@@ -141,6 +141,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MaximizeBox = false;
             this.Name = "FrmKindleSpider";
             this.Text = "Kindle资源爬虫";
             this.SizeChanged += new System.EventHandler(this.FrmKindleSpider_SizeChanged);

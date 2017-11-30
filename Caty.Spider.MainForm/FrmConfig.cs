@@ -29,10 +29,7 @@ namespace Caty.Spider.MainForm
             {
                 GetSetArgs();
             });
-            Task.Factory.StartNew(() =>
-            {
-                GetConStr();
-            });
+            GetConStr();
         }
 
         private void GetSetArgs()
