@@ -30,6 +30,7 @@ namespace Caty.Spider.MainForm
         public FrmKindleSpider()
         {
             InitializeComponent();
+            btnStop.Enabled = false;
         }
 
         System.Timers.Timer timer1 = new System.Timers.Timer();
@@ -41,6 +42,12 @@ namespace Caty.Spider.MainForm
             timer1.Enabled = true;
             timer1.Interval = 60000;
             timer1.AutoReset = true;
+            this.BeginInvoke(new MethodInvoker(() =>
+            {
+                txtLog.Text += "爬虫服务已启动，将在设定好的时间开始爬取\r\n";
+            }));
+            btnStart.Enabled = false;
+            btnStop.Enabled = true;
             //spiderTask.Start();
             //new Thread((ThreadStart)(delegate ()
             //{
@@ -292,7 +299,16 @@ namespace Caty.Spider.MainForm
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            spiderTask.Dispose();
+            if (spiderTask.IsCompleted)
+            {
+                spiderTask.Dispose();
+                btnStart.Enabled = true;
+                btnStop.Enabled = false;
+            }
+            else
+            {
+                txtLog.Text += "爬虫服务尚未执行完成，请在完成后再停止\r\n";
+            }
         }
 
         private void FrmKindleSpider_SizeChanged(object sender, EventArgs e)
@@ -332,7 +348,7 @@ namespace Caty.Spider.MainForm
             {
                 this.BeginInvoke(new MethodInvoker(() =>
                 {
-                    txtLog.Text += String.Format("当前时间：{0},爬虫将在{1}启动", DateTime.Now.ToString() + "\r\n", iHour + ":" + iMinute);
+                    txtLog.Text += String.Format("当前时间：{0},爬虫将在{1}启动\r\n", DateTime.Now.ToString(), iHour + ":" + iMinute);
                 }));
             }
             //设置时间 开始执行程序
