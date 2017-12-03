@@ -30,8 +30,8 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.checkIsSql = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkIsSql = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.numMinute2 = new System.Windows.Forms.NumericUpDown();
@@ -97,16 +97,6 @@
             this.tabPage2.Text = "爬虫设置";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // checkIsSql
-            // 
-            this.checkIsSql.AutoSize = true;
-            this.checkIsSql.Location = new System.Drawing.Point(15, 241);
-            this.checkIsSql.Name = "checkIsSql";
-            this.checkIsSql.Size = new System.Drawing.Size(111, 21);
-            this.checkIsSql.TabIndex = 26;
-            this.checkIsSql.Text = "是否启用数据库";
-            this.checkIsSql.UseVisualStyleBackColor = true;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.checkIsSql);
@@ -119,6 +109,16 @@
             this.groupBox1.Size = new System.Drawing.Size(315, 270);
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
+            // 
+            // checkIsSql
+            // 
+            this.checkIsSql.AutoSize = true;
+            this.checkIsSql.Location = new System.Drawing.Point(15, 241);
+            this.checkIsSql.Name = "checkIsSql";
+            this.checkIsSql.Size = new System.Drawing.Size(111, 21);
+            this.checkIsSql.TabIndex = 26;
+            this.checkIsSql.Text = "是否启用数据库";
+            this.checkIsSql.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 

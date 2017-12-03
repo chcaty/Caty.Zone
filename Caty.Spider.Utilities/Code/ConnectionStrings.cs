@@ -72,7 +72,7 @@ namespace Caty.Spider.Utilities.Code
             }
             config.AppSettings.Settings.Add(key, value);
             config.Save(ConfigurationSaveMode.Modified);
-            ConfigurationManager.RefreshSection(key);
+            ConfigurationManager.RefreshSection("appSettings");
         }
     }
 }

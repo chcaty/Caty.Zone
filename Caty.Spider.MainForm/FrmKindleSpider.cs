@@ -3,6 +3,7 @@ using AngleSharp.Parser.Html;
 using Caty.Spider.Crawler;
 using Caty.Spider.Dal.Implements;
 using Caty.Spider.Model;
+using Caty.Spider.Utilities.Code;
 using Caty.Spider.Utilities.Log;
 using System;
 using System.Collections.Generic;
@@ -334,9 +335,18 @@ namespace Caty.Spider.MainForm
             int intHour = e.SignalTime.Hour;
             int intMinute = e.SignalTime.Minute;
             int intSecond = e.SignalTime.Second;
+            int iHour, iMinute;
             //定制时间 如 在10：30：00的时候执行某个函数
-            int iHour = Convert.ToInt32(argsDal.LoadEntities(b => true).First().Hour);
-            int iMinute = Convert.ToInt32(argsDal.LoadEntities(b => true).First().Minute);
+            if (Convert.ToBoolean(ConnectionStrings.GetArgsValue("IsSql")))
+            {
+                iHour = Convert.ToInt32(argsDal.LoadEntities(b => true).First().Hour);
+                iMinute = Convert.ToInt32(argsDal.LoadEntities(b => true).First().Minute);
+            }
+            else
+            {
+                iHour = Convert.ToInt32(ConnectionStrings.GetArgsValue("Hour").Trim());
+                iMinute = Convert.ToInt32(ConnectionStrings.GetArgsValue("Minute").Trim());
+            }
             int iSecond = 00;
             // 设置　 每秒钟的开始执行一次  
             if (intHour == iHour && intMinute == iMinute)

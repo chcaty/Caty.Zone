@@ -127,6 +127,7 @@ namespace Caty.Spider.MainForm
             //ArgsDal.LoadEntities(null).First();
             //SpiderArgs args = ArgsDal.LoadEntities(b=>true).First();
             SpiderArgs args = new SpiderArgs();
+            args.SpiderArgsId = 1;
             if (rbtnDay.Checked)
             {
                 args.SpiderType = 1;
@@ -143,14 +144,15 @@ namespace Caty.Spider.MainForm
             {
                 ArgsDal.EditEntity(args);
                 ArgsDal.SaveChange();
+
             }
             else
             {
-                ConnectionStrings.UpdateArgsValue("IsSql", checkIsSql.Checked.ToString());
                 ConnectionStrings.UpdateArgsValue("SpiderType", args.SpiderType.ToString());
                 ConnectionStrings.UpdateArgsValue("Hour", args.Hour.ToString());
                 ConnectionStrings.UpdateArgsValue("Minute", args.Minute.ToString());
             }
+            ConnectionStrings.UpdateArgsValue("IsSql", checkIsSql.Checked.ToString());
         }
 
         private void btnClose_Click(object sender, EventArgs e)
