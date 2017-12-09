@@ -3,8 +3,7 @@ using AngleSharp.Parser.Html;
 using Caty.Spider.Crawler;
 using Caty.Spider.Dal.Implements;
 using Caty.Spider.Model;
-using Caty.Spider.Utilities.Code;
-using Caty.Spider.Utilities.Log;
+using Caty.Spider.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,8 +19,9 @@ using System.Windows.Forms;
 namespace Caty.Spider.MainForm
 {
     public partial class FrmKindleSpider : Form
-    {
+    { 
         BookDal bookDal = new BookDal();
+        static string dirPath = "Excel", filePath = "";
         SpiderArgsDal argsDal = new SpiderArgsDal();
         static HtmlParser htmlParser = new HtmlParser();
         static List<Book> bookList = new List<Book>();
@@ -39,21 +39,18 @@ namespace Caty.Spider.MainForm
         private void btnStart_Click(object sender, EventArgs e)
         {
             spiderTask = new Task(KindleCrawler);
-            timer1.Elapsed += new System.Timers.ElapsedEventHandler(Timer1_Elapsed);
-            timer1.Enabled = true;
-            timer1.Interval = 60000;
-            timer1.AutoReset = true;
-            this.BeginInvoke(new MethodInvoker(() =>
-            {
-                txtLog.Text += "爬虫服务已启动，将在设定好的时间开始爬取\r\n";
-            }));
+            //timer1.Elapsed += new System.Timers.ElapsedEventHandler(Timer1_Elapsed);
+            //timer1.Enabled = true;
+            //timer1.Interval = 60000;
+            //timer1.AutoReset = true;
+            //this.BeginInvoke(new MethodInvoker(() =>
+            //{
+            //    txtLog.Text += "爬虫服务已启动，将在设定好的时间开始爬取\r\n";
+            //}));
+            spiderTask.Start();
+
             btnStart.Enabled = false;
             btnStop.Enabled = true;
-            //spiderTask.Start();
-            //new Thread((ThreadStart)(delegate ()
-            //{
-            //    KindleCrawler();
-            //})).Start();
         }
 
         public void KindleCrawler()
@@ -75,6 +72,7 @@ namespace Caty.Spider.MainForm
                 var dom = htmlParser.Parse(e.PageSource);
                 var link = dom.QuerySelectorAll("div.pagenavi");
                 var temp = GetPageList(link);
+                //var temp = new List<string>() { "http://mebook.cc/page/2"  };
                 foreach (var t in temp)
                 {
                     BookCrawler(t);
@@ -91,7 +89,25 @@ namespace Caty.Spider.MainForm
                             BookDownloadCrawler(b);
                         }
                     }
-                    bookDal.SaveChange();
+                    if (Convert.ToBoolean(ConnectionStrings.GetArgsValue("IsSql").Trim()))
+                    {
+                        bookDal.SaveChange();
+                    }
+                    else
+                    {
+                        DataTable dt =  ListToDataTable.ToDataTable<Book>(bookList);
+                        //excelHelper.DataTableToExcel(dt, "第" + Convert.ToString(temp.IndexOf(t) + 1) + "页全部书籍信息", true);
+                        
+                        this.BeginInvoke(new MethodInvoker(() =>
+                        {
+                            filePath = dirPath + "/Kindle资源爬虫第" + Convert.ToString(temp.IndexOf(t) + 1) + "页书籍信息.xlsx";
+                            CreateExcelFile();
+                            ExcelHelper excelHelper = new ExcelHelper(filePath);
+                            excelHelper.DataTableToExcel(dt, "第" + Convert.ToString(temp.IndexOf(t) + 1) + "页全部书籍信息", true);
+                        }));
+                        
+                        //DataExcel.DataTableToExcel("/第" + Convert.ToString(temp.IndexOf(t) + 1) + "页全部书籍信息.xls", dt, true);
+                    }
                     bookList.Clear();
                 }
                 Console.WriteLine("爬虫抓取任务完成！合计 " + link.Length + " 个页面。");
@@ -263,16 +279,19 @@ namespace Caty.Spider.MainForm
                 var info = downloadpwdinfo[downloadpwdinfo.Count - 3].InnerHtml;
                 string[] str = info.Split('：');
                 book.DownloadPsw_BDYP = str.Length > 2 ? str[2].Substring(0, 4) : String.Empty; 
-                book.DownloadPsw_TYYP = str.Length > 3 ? str[3].Substring(0, 4) : String.Empty; 
-                if (!bookDal.IsExist(book))
+                book.DownloadPsw_TYYP = str.Length > 3 ? str[3].Substring(0, 4) : String.Empty;
+                if (Convert.ToBoolean(ConnectionStrings.GetArgsValue("IsSql").Trim()))
                 {
-                    bookDal.AddEntity(book);
-                }
-                else
-                {
-                    Book oldbook = bookDal.LoadEntities(b => b.BookName == book.BookName).First();
-                    book.BookId = oldbook.BookId;
-                    bookDal.EditEntity(book);
+                    if (!bookDal.IsExist(book))
+                    {
+                        bookDal.AddEntity(book);
+                    }
+                    else
+                    {
+                        Book oldbook = bookDal.LoadEntities(b => b.BookName == book.BookName).First();
+                        book.BookId = oldbook.BookId;
+                        bookDal.EditEntity(book);
+                    }
                 }
                 Console.WriteLine(book.BookName + "下载链接抓取任务完成！");
                 SetMessage(book.BookName + "下载链接抓取任务完成！");
@@ -284,7 +303,7 @@ namespace Caty.Spider.MainForm
                 SetMessage("地址：" + e.Uri.ToString());
                 Console.WriteLine("===============================================");
                 SetMessage("===============================================");
-                Thread.Sleep(10);
+                Thread.Sleep(1000);
             };
             bookdownloadCrawler.Start(new Uri(Url)).Wait();//没被封锁就别使用代理：60.221.50.118:8090
         }
@@ -348,6 +367,7 @@ namespace Caty.Spider.MainForm
                 iMinute = Convert.ToInt32(ConnectionStrings.GetArgsValue("Minute").Trim());
             }
             int iSecond = 00;
+            spiderTask.Start();
             // 设置　 每秒钟的开始执行一次  
             if (intHour == iHour && intMinute == iMinute)
             {
@@ -372,6 +392,18 @@ namespace Caty.Spider.MainForm
         {
             FrmConfig frmConfig = new FrmConfig();
             frmConfig.ShowDialog();
+        }
+
+        private void CreateExcelFile()
+        {
+            if (!Directory.Exists(dirPath))
+            {
+                Directory.CreateDirectory(dirPath);
+            }
+            if (!File.Exists(filePath))
+            {
+                File.Create(filePath);
+            }
         }
     }
 }

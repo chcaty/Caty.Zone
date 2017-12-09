@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Caty.Spider.Utilities.Log
+namespace Caty.Spider.Utilities
 { 
     public class Log4netLoger : ILoger
     {

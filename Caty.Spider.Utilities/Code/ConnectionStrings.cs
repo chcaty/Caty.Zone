@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 
-namespace Caty.Spider.Utilities.Code
+namespace Caty.Spider.Utilities
 {
     public class ConnectionStrings
     {

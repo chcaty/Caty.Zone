@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Caty.Spider.Utilities.Code;
+using Caty.Spider.Utilities;
 using Caty.Spider.Dal.Implements;
 using Caty.Spider.Model;
 using System.Threading;
@@ -142,9 +142,12 @@ namespace Caty.Spider.MainForm
             }
             if (checkIsSql.Checked)
             {
-                ArgsDal.EditEntity(args);
+                var ar = ArgsDal.LoadEntities(b => true).First();
+                ar.SpiderType = args.SpiderType;
+                ar.Hour = args.Hour;
+                ar.Minute = args.Minute;
+                ArgsDal.EditEntity(ar);
                 ArgsDal.SaveChange();
-
             }
             else
             {

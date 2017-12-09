@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Caty.Spider.Utilities.Log
+namespace Caty.Spider.Utilities
 {
     /// <summary>
     /// 日志器

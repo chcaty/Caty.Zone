@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Caty.Spider.Utilities.Code
+namespace Caty.Spider.Utilities
 {
     public class EncodeAndDecode
     {
