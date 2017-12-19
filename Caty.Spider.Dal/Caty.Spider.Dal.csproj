@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.4\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper.SimpleCRUD, Version=1.13.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.SimpleCRUD.1.13.0\lib\net45\Dapper.SimpleCRUD.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -108,11 +114,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implements\Dapper\BaseDal.cs" />
     <Compile Include="Implements\EF Core\BaseDal.cs" />
     <Compile Include="Implements\EF Core\Dal.cs" />
     <Compile Include="Implements\EF\BaseDal.cs" />
     <Compile Include="Implements\EF\Dal.cs" />
     <Compile Include="Implements\EF\DBContextFactory.cs" />
+    <Compile Include="Interface\Dapper\IBaseDal.cs" />
+    <Compile Include="Interface\Dapper\IDal.cs" />
     <Compile Include="Interface\EF Core\IBaseDal.cs" />
     <Compile Include="Interface\EF Core\IDal.cs" />
     <Compile Include="Interface\EF\IBaseDal.cs" />
@@ -127,6 +136,10 @@
     <ProjectReference Include="..\Caty.Spider.Model\Caty.Spider.Model.csproj">
       <Project>{71F04C94-09C6-4E38-B2FB-5EA0201E717C}</Project>
       <Name>Caty.Spider.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Caty.Spider.Utilities\Caty.Spider.Utilities.csproj">
+      <Project>{CB4CAF07-723B-4C37-A2CB-6A9A8E2ACA20}</Project>
+      <Name>Caty.Spider.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

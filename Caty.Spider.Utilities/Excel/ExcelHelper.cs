@@ -94,6 +94,7 @@ namespace Caty.Spider.Utilities
             catch (Exception ex)
             {
                 Console.WriteLine("Exception:" + ex.Message);
+                Loger.Instance.Write("Exception:" + ex.Message, LogMessageType.Error);
                 return -1;
                 //return;
             }

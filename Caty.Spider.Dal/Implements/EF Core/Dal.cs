@@ -14,6 +14,10 @@ namespace Caty.Spider.Dal.Implements.EF_Core
         {
         }
 
+        public bool IsExist(Book book)
+        {
+            throw new NotImplementedException();
+        }
     }
     public partial class SpiderArgsDal : BaseDal<SpiderArgs>, ISipderArgsDal
     {

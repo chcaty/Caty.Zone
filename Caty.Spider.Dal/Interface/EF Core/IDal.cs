@@ -9,8 +9,10 @@ namespace Caty.Spider.Dal.Interface.EF_Core
 {
     public partial interface IBookDal : IBaseDal<Book>
     {
+        bool IsExist(Book book);
     }
     public partial interface ISipderArgsDal : IBaseDal<SpiderArgs>
     {
+
     }
 }
