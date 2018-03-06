@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Caty.Spider.Crawler.Events
 {
+    /// <summary>
+    /// 爬虫错误事件
+    /// </summary>
     public class OnErrorEventArgs
     {
         public Uri Uri { get; set; }
