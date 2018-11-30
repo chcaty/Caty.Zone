@@ -16,7 +16,7 @@ namespace Caty.Spider.MainForm
 {
     public partial class FrmConfig : Form
     {
-        SpiderArgsDal ArgsDal = new SpiderArgsDal();
+        //SpiderArgsDal ArgsDal = new SpiderArgsDal();
         static string constring = "";
         public FrmConfig()
         {
@@ -34,22 +34,21 @@ namespace Caty.Spider.MainForm
 
         private void GetSetArgs()
         {
-            SpiderArgs args;
+            SpiderArgs args = new SpiderArgs
+            {
+                Hour = ConnectionStrings.GetArgsValue("Hour"),
+                Minute = ConnectionStrings.GetArgsValue("Minute"),
+                SpiderType = Convert.ToInt32(ConnectionStrings.GetArgsValue("SpiderType"))
+            };
             bool IsSpl;
             if (Convert.ToBoolean(ConnectionStrings.GetArgsValue("IsSql")))
             {
-                args = ArgsDal.LoadEntities(b => true).First();
+               // args = ArgsDal.LoadEntities(b => true).First();
                 IsSpl = true;
             }
             else
             {
                 IsSpl = false;
-                args = new SpiderArgs
-                {
-                    Hour = ConnectionStrings.GetArgsValue("Hour"),
-                    Minute = ConnectionStrings.GetArgsValue("Minute"),
-                    SpiderType = Convert.ToInt32(ConnectionStrings.GetArgsValue("SpiderType"))
-                };
             }                
             this.BeginInvoke(new MethodInvoker(() =>
             {
@@ -142,12 +141,12 @@ namespace Caty.Spider.MainForm
             }
             if (checkIsSql.Checked)
             {
-                var ar = ArgsDal.LoadEntities(b => true).First();
-                ar.SpiderType = args.SpiderType;
-                ar.Hour = args.Hour;
-                ar.Minute = args.Minute;
-                ArgsDal.EditEntity(ar);
-                ArgsDal.SaveChange();
+                //var ar = ArgsDal.LoadEntities(b => true).First();
+                //ar.SpiderType = args.SpiderType;
+                //ar.Hour = args.Hour;
+                //ar.Minute = args.Minute;
+                //ArgsDal.EditEntity(ar);
+                //ArgsDal.SaveChange();
             }
             else
             {

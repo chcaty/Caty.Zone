@@ -144,6 +144,7 @@
             this.MaximizeBox = false;
             this.Name = "FrmKindleSpider";
             this.Text = "Kindle资源爬虫";
+            this.Load += new System.EventHandler(this.FrmKindleSpider_Load);
             this.SizeChanged += new System.EventHandler(this.FrmKindleSpider_SizeChanged);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);

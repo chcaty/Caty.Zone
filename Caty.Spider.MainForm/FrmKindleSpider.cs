@@ -19,10 +19,10 @@ using System.Windows.Forms;
 namespace Caty.Spider.MainForm
 {
     public partial class FrmKindleSpider : Form
-    { 
-        BookDal bookDal = new BookDal();
+    {
+        //BookDal bookDal = new BookDal();
+        //SpiderArgsDal argsDal = new SpiderArgsDal();
         static string dirPath = "Excel", filePath = "";
-        SpiderArgsDal argsDal = new SpiderArgsDal();
         static HtmlParser htmlParser = new HtmlParser();
         static List<Book> bookList = new List<Book>();
         static List<string> pageList = new List<string>();
@@ -35,6 +35,13 @@ namespace Caty.Spider.MainForm
         }
 
         System.Timers.Timer timer1 = new System.Timers.Timer();
+
+        private void InitDb()
+        {
+            SQLiteHelper.CreateCommand();
+            Book book = new Book();
+            string sql = SQLiteHelper.GetFieldValue(book);
+        }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
@@ -91,7 +98,7 @@ namespace Caty.Spider.MainForm
                     }
                     if (Convert.ToBoolean(ConnectionStrings.GetArgsValue("IsSql").Trim()))
                     {
-                        bookDal.SaveChange();
+                        //bookDal.SaveChange();
                     }
                     else
                     {
@@ -179,7 +186,10 @@ namespace Caty.Spider.MainForm
                     {
                         var onlineURL = a.GetAttribute("href");
                         var title = a.GetAttribute("title");
-                        bookList.Add(new Book() { BookLink = onlineURL, BookName = title });
+                        if (!title.Equals("感谢所有捐赠的书友！！！"))
+                        {
+                            bookList.Add(new Book() { BookLink = onlineURL, BookName = title });
+                        }
                     });
                 }
                 count += bookList.Count;
@@ -282,16 +292,16 @@ namespace Caty.Spider.MainForm
                 book.DownloadPsw_TYYP = str.Length > 3 ? str[3].Substring(0, 4) : String.Empty;
                 if (Convert.ToBoolean(ConnectionStrings.GetArgsValue("IsSql").Trim()))
                 {
-                    if (!bookDal.IsExist(book))
-                    {
-                        bookDal.AddEntity(book);
-                    }
-                    else
-                    {
-                        Book oldbook = bookDal.LoadEntities(b => b.BookName == book.BookName).First();
-                        book.BookId = oldbook.BookId;
-                        bookDal.EditEntity(book);
-                    }
+                    //if (!bookDal.IsExist(book))
+                    //{
+                    //    bookDal.AddEntity(book);
+                    //}
+                    //else
+                    //{
+                    //    Book oldbook = bookDal.LoadEntities(b => b.BookName == book.BookName).First();
+                    //    book.BookId = oldbook.BookId;
+                    //    bookDal.EditEntity(book);
+                    //}
                 }
                 Console.WriteLine(book.BookName + "下载链接抓取任务完成！");
                 SetMessage(book.BookName + "下载链接抓取任务完成！");
@@ -354,12 +364,12 @@ namespace Caty.Spider.MainForm
             int intHour = e.SignalTime.Hour;
             int intMinute = e.SignalTime.Minute;
             int intSecond = e.SignalTime.Second;
-            int iHour, iMinute;
+            int iHour = 1, iMinute =1;
             //定制时间 如 在10：30：00的时候执行某个函数
             if (Convert.ToBoolean(ConnectionStrings.GetArgsValue("IsSql")))
             {
-                iHour = Convert.ToInt32(argsDal.LoadEntities(b => true).First().Hour);
-                iMinute = Convert.ToInt32(argsDal.LoadEntities(b => true).First().Minute);
+                //iHour = Convert.ToInt32(argsDal.LoadEntities(b => true).First().Hour);
+                //iMinute = Convert.ToInt32(argsDal.LoadEntities(b => true).First().Minute);
             }
             else
             {
@@ -392,6 +402,11 @@ namespace Caty.Spider.MainForm
         {
             FrmConfig frmConfig = new FrmConfig();
             frmConfig.ShowDialog();
+        }
+
+        private void FrmKindleSpider_Load(object sender, EventArgs e)
+        {
+            InitDb();
         }
 
         private void CreateExcelFile()

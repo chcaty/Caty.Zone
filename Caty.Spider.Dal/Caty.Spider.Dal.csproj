@@ -30,12 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dapper, Version=1.50.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapper.1.50.4\lib\net451\Dapper.dll</HintPath>
-    </Reference>
-    <Reference Include="Dapper.SimpleCRUD, Version=1.13.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapper.SimpleCRUD.1.13.0\lib\net45\Dapper.SimpleCRUD.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -114,14 +108,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Implements\Dapper\BaseDal.cs" />
     <Compile Include="Implements\EF Core\BaseDal.cs" />
     <Compile Include="Implements\EF Core\Dal.cs" />
     <Compile Include="Implements\EF\BaseDal.cs" />
     <Compile Include="Implements\EF\Dal.cs" />
     <Compile Include="Implements\EF\DBContextFactory.cs" />
-    <Compile Include="Interface\Dapper\IBaseDal.cs" />
-    <Compile Include="Interface\Dapper\IDal.cs" />
     <Compile Include="Interface\EF Core\IBaseDal.cs" />
     <Compile Include="Interface\EF Core\IDal.cs" />
     <Compile Include="Interface\EF\IBaseDal.cs" />
@@ -129,7 +120,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
