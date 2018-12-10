@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace Caty.Spider.MainForm
         static HtmlParser htmlParser = new HtmlParser();
         static List<Book> bookList = new List<Book>();
         static List<string> pageList = new List<string>();
+        BookSqliteDb sqliteDb = new BookSqliteDb($"{Environment.CurrentDirectory}\\Kindle.db");
         int count = 0;
         Task spiderTask;
         public FrmKindleSpider()
@@ -38,9 +40,7 @@ namespace Caty.Spider.MainForm
 
         private void InitDb()
         {
-            SQLiteHelper.CreateCommand();
-            Book book = new Book();
-            string sql = SQLiteHelper.GetFieldValue(book);
+
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -302,6 +302,7 @@ namespace Caty.Spider.MainForm
                     //    book.BookId = oldbook.BookId;
                     //    bookDal.EditEntity(book);
                     //}
+                    sqliteDb.Insert(book);
                 }
                 Console.WriteLine(book.BookName + "下载链接抓取任务完成！");
                 SetMessage(book.BookName + "下载链接抓取任务完成！");

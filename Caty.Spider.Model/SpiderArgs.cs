@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace Caty.Spider.Model
 {
     public class SpiderArgs
     {
+        [PrimaryKey, AutoIncrement]
         public int SpiderArgsId { get; set; }
 
         public int SpiderType { get; set; }
